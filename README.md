@@ -2,11 +2,14 @@
 
 A private long-form writing studio for essays, Substack drafts, book notes, and public reasoning.
 
+**Live:** https://coffee-curiosity-engine.pages.dev/
+
 ## Stack
 
 - Vite + React + TypeScript
-- Plain CSS
+- Plain CSS (dark/light mode)
 - localStorage (no backend, no auth, no database)
+- Cloudflare Pages (deployment)
 
 ## Development
 
@@ -23,14 +26,42 @@ npm run build
 
 ## Features
 
-- Three-column layout: Article Navigator / Editor / Thinking Codex + Editorial Review
-- Create, rename, delete articles
-- Title, subtitle, body, status fields
-- Thinking Codex: voice rules, banned AI habits, recurring themes, source notes, publication checklist
-- Deterministic editorial review: voice authenticity, argument clarity, human pacing, anti-LLM smell, evidence discipline, publication readiness
-- Markdown export
-- All data persists in localStorage
+### Writing
+- Three-column layout: Navigator / Editor / Right panel
+- 14 writing modes: Essay, Fiction, Technical, Journal, Email, LinkedIn, Medium, Substack, GitHub Docs, Poem, Book Chapter, Research Paper, Screenplay, Blog Post
+- Title, subtitle, body, outline (collapsible), status fields
+- Tags — inline tag editor, tag filter (`#tagname` syntax in search)
+- Project grouping — group articles under collapsible project headers
+- Full-text search across title, body, and outline
 
-## Release
+### Editor tools
+- Markdown preview toggle (Write / Preview)
+- Word count + reading time
+- Focus mode
+- 25-min Pomodoro timer with browser notification
+- Dark / light mode toggle
 
-0.1 — Private writing engine scaffold
+### Export
+- Copy Markdown
+- Export Markdown (.md)
+- Export Word (.docx)
+
+### Editorial
+- Deterministic editorial review with SVG score ring (green/amber/red)
+- Mode-specific review categories
+- LanguageTool grammar check with one-click apply
+
+### AI Assist (Gemini)
+- User-supplied Gemini API key (stored in localStorage, free tier)
+- Continue writing
+- Suggest outline
+- Brainstorm directions
+- Research topic
+
+### Codex
+- Voice rules, banned AI habits, recurring themes, source notes, publication checklist
+
+## Release history
+
+- **0.2.1** — v2 complete: AI assist, grammar check, project grouping, focus timer, DOCX export, markdown preview, 5 new modes, tags, outline, score ring, branding
+- **0.1** — Private writing engine scaffold

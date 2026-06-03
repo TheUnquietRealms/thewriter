@@ -2185,7 +2185,7 @@ git commit -m "feat: Gemini AI panel — continue, outline, brainstorm, research
 
 ## Final: Deploy
 
-- [ ] **Push to trigger Cloudflare Pages**
+- [x] **Push to trigger Cloudflare Pages**
 
 ```bash
 git push origin main
