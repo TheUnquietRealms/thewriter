@@ -1,5 +1,5 @@
+import { saveGeminiKey } from '../lib/gemini'
 import { useState } from 'react'
-import { saveGeminiKey, validateGeminiKey } from '../lib/gemini'
 
 interface Props {
   currentKey: string
@@ -9,25 +9,18 @@ interface Props {
 
 export default function SettingsPanel({ currentKey, onSave, onClose }: Props) {
   const [keyInput, setKeyInput] = useState(currentKey)
-  const [status, setStatus] = useState<'idle' | 'validating' | 'valid' | 'invalid'>('idle')
 
-  async function handleSave() {
-    if (!keyInput.trim()) {
-      saveGeminiKey('')
-      onSave('')
-      onClose()
-      return
-    }
-    setStatus('validating')
-    const valid = await validateGeminiKey(keyInput.trim())
-    if (valid) {
-      saveGeminiKey(keyInput.trim())
-      onSave(keyInput.trim())
-      setStatus('valid')
-      setTimeout(onClose, 800)
-    } else {
-      setStatus('invalid')
-    }
+  function handleSave() {
+    const key = keyInput.trim()
+    saveGeminiKey(key)
+    onSave(key)
+    onClose()
+  }
+
+  function handleClear() {
+    saveGeminiKey('')
+    onSave('')
+    onClose()
   }
 
   return (
@@ -46,22 +39,21 @@ export default function SettingsPanel({ currentKey, onSave, onClose }: Props) {
           value={keyInput}
           onChange={e => setKeyInput(e.target.value)}
           onKeyDown={e => { if (e.key === 'Enter') handleSave() }}
+          autoFocus
         />
         <p className="settings-hint">
           Free key at{' '}
           <a href="https://ai.google.dev" target="_blank" rel="noreferrer">ai.google.dev</a>.
           Stored locally — never sent anywhere except Google.
         </p>
-        {status === 'invalid' && <p className="settings-error">Invalid key — check and try again.</p>}
-        {status === 'valid' && <p className="settings-success">✓ Key valid</p>}
       </div>
 
       <div className="settings-actions">
-        <button className="btn-review" onClick={handleSave} disabled={status === 'validating'}>
-          {status === 'validating' ? 'Validating…' : 'Save Key'}
+        <button className="btn-review" onClick={handleSave} disabled={!keyInput.trim()}>
+          Save Key
         </button>
         {currentKey && (
-          <button className="btn-toolbar" onClick={() => { saveGeminiKey(''); onSave(''); onClose() }}>
+          <button className="btn-toolbar" onClick={handleClear}>
             Clear Key
           </button>
         )}
