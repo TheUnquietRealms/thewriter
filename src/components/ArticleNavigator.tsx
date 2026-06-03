@@ -48,17 +48,27 @@ export default function ArticleNavigator({ articles, selectedId, onSelect, onUpd
     setRenamingId(null)
   }
 
+  const tagFilter = filter.startsWith('#') ? filter.slice(1).toLowerCase() : null
+  const textFilter = tagFilter ? null : filter.toLowerCase()
+
   const sorted = [...articles]
     .sort((a, b) => b.updatedAt - a.updatedAt)
-    .filter(a => !filter || a.title.toLowerCase().includes(filter.toLowerCase()))
+    .filter(a => {
+      if (tagFilter) return a.tags.some(t => t.toLowerCase().includes(tagFilter))
+      if (textFilter) return a.title.toLowerCase().includes(textFilter)
+      return true
+    })
 
   return (
     <aside className="navigator">
       <header className="nav-header">
-        <span className="nav-title">Articles</span>
-        <button className="btn-new" onClick={handleNew} title="New article" aria-label="New article">
-          + New
-        </button>
+        <div className="nav-brand">
+          <div className="nav-logo">☕</div>
+          <div className="nav-brand-text">
+            <span className="nav-brand-name">Coffee Curiosity</span>
+            <span className="nav-brand-sub">ENGINE</span>
+          </div>
+        </div>
       </header>
 
       <div className="nav-search-wrap">
@@ -122,6 +132,14 @@ export default function ArticleNavigator({ articles, selectedId, onSelect, onUpd
                   <span>{countWords(article.body).toLocaleString()}w</span>
                   <span className="nav-meta-sep">·</span>
                   <span>{relativeTime(article.updatedAt)}</span>
+                  {article.tags.length > 0 && (
+                    <>
+                      <span className="nav-meta-sep">·</span>
+                      {article.tags.slice(0, 2).map(tag => (
+                        <span key={tag} className="nav-tag-pill">{tag}</span>
+                      ))}
+                    </>
+                  )}
                 </div>
                 <div className="nav-actions" onClick={e => e.stopPropagation()}>
                   <button
@@ -154,6 +172,11 @@ export default function ArticleNavigator({ articles, selectedId, onSelect, onUpd
           <li className="nav-empty">No match for "{filter}".</li>
         )}
       </ul>
+      <footer className="nav-footer">
+        <button className="btn-new-full" onClick={handleNew} aria-label="New article">
+          + New Article
+        </button>
+      </footer>
     </aside>
   )
 }
