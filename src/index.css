@@ -914,3 +914,35 @@ body {
 
   .editor-inner { padding: 20px 20px 60px; }
 }
+
+/* ── Markdown Preview ───────────────────────── */
+.md-preview { font: 400 18px/1.85 Georgia,'Times New Roman',serif; color: var(--text-h); min-height: 320px; }
+.md-preview h1,.md-preview h2,.md-preview h3 { font-family: var(--heading); color: var(--text-h); letter-spacing: -0.02em; margin: 1.2em 0 0.4em; }
+.md-preview p { margin: 0 0 1em; }
+.md-preview strong { font-weight: 700; }
+.md-preview em { font-style: italic; }
+.md-preview code { font-family: monospace; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; font-size: 0.85em; }
+.md-preview blockquote { border-left: 3px solid var(--accent-border); background: var(--accent-bg); margin: 0 0 1em; padding: 8px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.md-preview ul,.md-preview ol { padding-left: 1.5em; margin: 0 0 1em; }
+
+/* ── Project grouping ───────────────────────── */
+.nav-project-group { list-style: none; margin-bottom: 4px; }
+.nav-project-header { width: 100%; background: none; border: none; display: flex; align-items: center; gap: 6px; padding: 5px 10px; color: var(--text-muted); font: 700 10px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border-radius: var(--radius-sm); }
+.nav-project-header:hover { background: var(--surface-hover); color: var(--text-h); }
+.nav-project-name { flex: 1; text-align: left; }
+.nav-project-count { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius-full); font-size: 9px; padding: 1px 5px; }
+
+/* ── Grammar panel ──────────────────────────── */
+.grammar-panel { padding: 18px 16px 24px; flex: 1; overflow-y: auto; }
+.grammar-match { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; background: var(--surface-raised); }
+.grammar-message { font-size: 12px; color: var(--text); margin: 0 0 5px; }
+.grammar-context { font: italic 11px Georgia,serif; color: var(--text-muted); margin-bottom: 7px; }
+.btn-grammar-replacement { background: var(--green-bg); border: 1px solid rgba(22,163,74,0.3); border-radius: var(--radius-sm); color: var(--green); font: 600 11px var(--sans); padding: 3px 9px; cursor: pointer; margin-right: 5px; margin-top: 3px; }
+.grammar-error { font-size: 12px; color: var(--red); }
+.grammar-loading { font-size: 12px; color: var(--text-muted); }
+
+/* ── Focus timer ────────────────────────────── */
+.focus-timer { display: flex; align-items: center; gap: 6px; }
+.focus-timer-display { font: 700 13px var(--sans); color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.btn-timer-toggle,.btn-timer-reset { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 1px 4px; font-size: 13px; line-height: 1; }
+.btn-timer-toggle:hover,.btn-timer-reset:hover { color: var(--text-h); }

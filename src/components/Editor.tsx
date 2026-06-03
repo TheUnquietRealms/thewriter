@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import type { Article, ArticleStatus, WritingMode } from '../types'
 import { exportMarkdown, getMarkdown } from '../lib/storage'
+import { exportDocx } from '../lib/export'
 import { MODE_LIST } from '../lib/modes'
 import { countWords, relativeTime, readingTime } from '../lib/utils'
 import type { SaveStatus } from '../App'
+import MarkdownPreview from './MarkdownPreview'
 
 interface Props {
   article: Article | null
@@ -13,11 +15,17 @@ interface Props {
   onToggleFocus?: () => void
   darkMode?: boolean
   onToggleDark?: () => void
+  onGrammarCheck?: () => void
+  grammarCooldown?: boolean
+  timerSeconds?: number | null
+  timerRunning?: boolean
+  onToggleTimer?: () => void
+  onResetTimer?: () => void
 }
 
 const STATUSES: ArticleStatus[] = ['draft', 'review', 'published']
 
-export default function Editor({ article, onChange, saveStatus, focusMode, onToggleFocus, darkMode, onToggleDark }: Props) {
+export default function Editor({ article, onChange, saveStatus, focusMode, onToggleFocus, darkMode, onToggleDark, onGrammarCheck, grammarCooldown, timerSeconds, timerRunning, onToggleTimer, onResetTimer }: Props) {
   const [copied, setCopied] = useState(false)
   const [settingTarget, setSettingTarget] = useState(false)
   const [targetInput, setTargetInput] = useState('')
@@ -25,6 +33,7 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
   const [outlineOpen, setOutlineOpen] = useState(() => Boolean(article?.outline))
   const [tagInput, setTagInput] = useState('')
   const [addingTag, setAddingTag] = useState(false)
+  const [previewMode, setPreviewMode] = useState(false)
 
   // reset target form + outline state when switching articles
   useEffect(() => {
@@ -33,6 +42,7 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
     setOutlineOpen(Boolean(article?.outline))
     setAddingTag(false)
     setTagInput('')
+    setPreviewMode(false)
   }, [article?.id])
 
   // auto-resize textarea to content height
@@ -144,6 +154,21 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
               {words.toLocaleString()}w
             </span>
             <button
+              className="btn-toolbar"
+              onClick={onGrammarCheck}
+              disabled={grammarCooldown || !article}
+              title="Check grammar (LanguageTool, free)"
+            >
+              Grammar
+            </button>
+            <button
+              className={`btn-toolbar${previewMode ? ' btn-toolbar--accent' : ''}`}
+              onClick={() => setPreviewMode(p => !p)}
+              title="Toggle preview"
+            >
+              {previewMode ? 'Write' : 'Preview'}
+            </button>
+            <button
               className={`btn-toolbar${copied ? ' btn-toolbar--accent' : ''}`}
               onClick={handleCopy}
               aria-label="Copy as markdown"
@@ -158,6 +183,14 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
               title="Download as .md file"
             >
               Export
+            </button>
+            <button
+              className="btn-toolbar"
+              onClick={() => exportDocx(article)}
+              aria-label="Export as Word document"
+              title="Download as .docx"
+            >
+              DOCX
             </button>
             <button
               className="btn-focus"
@@ -175,6 +208,9 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
             >
               {focusMode ? '⊠' : '⊡'}
             </button>
+            {timerSeconds === null && (
+              <button className="btn-focus" onClick={onToggleTimer} title="Start 25-min focus timer">⏱</button>
+            )}
           </div>
         </div>
 
@@ -238,20 +274,33 @@ export default function Editor({ article, onChange, saveStatus, focusMode, onTog
           )}
         </div>
 
-        <textarea
-          ref={bodyRef}
-          className="field-body"
-          placeholder="Write here…"
-          value={article.body}
-          onChange={e => update({ body: e.target.value })}
-          aria-label="Article body"
-          spellCheck
-        />
+        {previewMode
+          ? <MarkdownPreview body={article.body} />
+          : <textarea
+              ref={bodyRef}
+              className="field-body"
+              placeholder="Write here…"
+              value={article.body}
+              onChange={e => update({ body: e.target.value })}
+              aria-label="Article body"
+              spellCheck
+            />
+        }
 
         <div className="editor-footer">
           <span className="editor-last-edited">
             Last edited {relativeTime(article.updatedAt)}
           </span>
+
+          {timerSeconds !== null && (
+            <div className="focus-timer">
+              <span className="focus-timer-display">
+                {Math.floor((timerSeconds ?? 0) / 60).toString().padStart(2, '0')}:{((timerSeconds ?? 0) % 60).toString().padStart(2, '0')}
+              </span>
+              <button className="btn-timer-toggle" onClick={onToggleTimer}>{timerRunning ? '⏸' : '▶'}</button>
+              <button className="btn-timer-reset" onDoubleClick={onResetTimer} title="Double-click to reset">✕</button>
+            </div>
+          )}
 
           <div className="editor-footer-right">
             {target != null ? (
