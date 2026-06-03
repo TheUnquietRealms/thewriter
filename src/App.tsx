@@ -107,6 +107,8 @@ export default function App() {
     saveCodex(updated)
   }, [])
 
+  const selected = articles.find(a => a.id === selectedId) ?? null
+
   const handleGrammarCheck = useCallback(async () => {
     if (!selected || grammarCooldown) return
     setGrammarLoading(true)
@@ -175,8 +177,6 @@ export default function App() {
     }, 1000)
     return () => { if (timerRef.current) clearInterval(timerRef.current) }
   }, [timerRunning])
-
-  const selected = articles.find(a => a.id === selectedId) ?? null
 
   return (
     <div className={`app-shell${focusMode ? ' app-shell--focus' : ''}`}>
