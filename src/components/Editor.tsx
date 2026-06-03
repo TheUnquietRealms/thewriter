@@ -9,11 +9,15 @@ interface Props {
   article: Article | null
   onChange: (article: Article) => void
   saveStatus: SaveStatus
+  focusMode?: boolean
+  onToggleFocus?: () => void
+  darkMode?: boolean
+  onToggleDark?: () => void
 }
 
 const STATUSES: ArticleStatus[] = ['draft', 'review', 'published']
 
-export default function Editor({ article, onChange, saveStatus }: Props) {
+export default function Editor({ article, onChange, saveStatus, focusMode, onToggleFocus, darkMode, onToggleDark }: Props) {
   const [copied, setCopied] = useState(false)
   const [settingTarget, setSettingTarget] = useState(false)
   const [targetInput, setTargetInput] = useState('')
@@ -133,6 +137,22 @@ export default function Editor({ article, onChange, saveStatus }: Props) {
               title="Download as .md file"
             >
               Export
+            </button>
+            <button
+              className="btn-focus"
+              onClick={onToggleDark}
+              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={darkMode ? 'Light mode' : 'Dark mode'}
+            >
+              {darkMode ? '☀' : '☾'}
+            </button>
+            <button
+              className="btn-focus"
+              onClick={onToggleFocus}
+              aria-label={focusMode ? 'Exit focus mode' : 'Enter focus mode'}
+              title={focusMode ? 'Exit focus mode' : 'Focus mode'}
+            >
+              {focusMode ? '⊠' : '⊡'}
             </button>
           </div>
         </div>

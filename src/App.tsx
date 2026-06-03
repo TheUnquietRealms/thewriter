@@ -20,6 +20,17 @@ export default function App() {
   const [codex, setCodex] = useState<Codex>(DEFAULT_CODEX)
   const [rightTab, setRightTab] = useState<'codex' | 'review'>('codex')
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle')
+  const [focusMode, setFocusMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem('cce_theme')
+    if (stored) return stored === 'dark'
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light'
+    localStorage.setItem('cce_theme', darkMode ? 'dark' : 'light')
+  }, [darkMode])
 
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -84,7 +95,7 @@ export default function App() {
   const selected = articles.find(a => a.id === selectedId) ?? null
 
   return (
-    <div className="app">
+    <div className={`app-shell${focusMode ? ' app-shell--focus' : ''}`}>
       <ArticleNavigator
         articles={articles}
         selectedId={selectedId}
@@ -95,6 +106,10 @@ export default function App() {
         article={selected}
         onChange={handleArticleChange}
         saveStatus={saveStatus}
+        focusMode={focusMode}
+        onToggleFocus={() => setFocusMode(f => !f)}
+        darkMode={darkMode}
+        onToggleDark={() => setDarkMode(d => !d)}
       />
       <div className="right-panel">
         <div className="right-tabs">
