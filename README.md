@@ -51,8 +51,10 @@ npm run build
 - Mode-specific review categories
 - LanguageTool grammar check with one-click apply
 
-### AI Assist (Gemini)
-- User-supplied Gemini API key (stored in localStorage, free tier)
+### AI Assist
+- Multiple providers: Gemini, OpenAI, OpenRouter, Anthropic (Claude)
+- User-supplied API key (stored in localStorage; never sent anywhere except the chosen provider)
+- Selectable model per provider
 - Continue writing
 - Suggest outline
 - Brainstorm directions
@@ -63,5 +65,9 @@ npm run build
 
 ## Release history
 
+- **0.3.0** — Multi-provider AI assist (Gemini, OpenAI, OpenRouter, Anthropic) with selectable models
 - **0.2.1** — v2 complete: AI assist, grammar check, project grouping, focus timer, DOCX export, markdown preview, 5 new modes, tags, outline, score ring, branding
 - **0.1** — Private writing engine scaffold
+
+---
+© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
