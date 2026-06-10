@@ -70,4 +70,4 @@ npm run build
 - **0.1** — Private writing engine scaffold
 
 ---
-© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
+© 2026 Zencloud Advisory. All rights reserved. Proprietary and confidential.
