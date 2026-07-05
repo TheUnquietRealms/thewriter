@@ -38,8 +38,8 @@ npm run typecheck
 - Three-column layout: Navigator / Editor / Right panel
 - 14 writing modes: Essay, Fiction, Technical, Journal, Email, LinkedIn, Medium, Substack, GitHub Docs, Poem, Book Chapter, Research Paper, Screenplay, Blog Post
 - Title, subtitle, body, outline (collapsible), status fields
-- Tags â inline tag editor, tag filter (`#tagname` syntax in search)
-- Project grouping â group articles under collapsible project headers
+- Tags — inline tag editor, tag filter (`#tagname` syntax in search)
+- Project grouping — group articles under collapsible project headers
 - Full-text search across title, body, and outline
 
 ### Editor tools
@@ -73,10 +73,10 @@ npm run typecheck
 
 ## Release history
 
-- **1.0.0** â Rebrand to The Writer. Production closeout: type-checking fixed (`npm run typecheck`), MVP/MLP/Epics status documented in `docs/superpowers/specs/2026-07-05-closeout.md`.
-- **0.3.0** â Multi-provider AI assist (Gemini, OpenAI, OpenRouter, Anthropic) with selectable models
-- **0.2.1** â v2 complete: AI assist, grammar check, project grouping, focus timer, DOCX export, markdown preview, 5 new modes, tags, outline, score ring, branding
-- **0.1** â Private writing engine scaffold
+- **1.0.0** — Rebrand to The Writer. Production closeout: type-checking fixed (`npm run typecheck`), MVP/MLP/Epics status documented in `docs/superpowers/specs/2026-07-05-closeout.md`.
+- **0.3.0** — Multi-provider AI assist (Gemini, OpenAI, OpenRouter, Anthropic) with selectable models
+- **0.2.1** — v2 complete: AI assist, grammar check, project grouping, focus timer, DOCX export, markdown preview, 5 new modes, tags, outline, score ring, branding
+- **0.1** — Private writing engine scaffold
 
 ---
-Â© 2026 Zencloud Advisory. All rights reserved. Proprietary and confidential.
+© 2026 Zencloud Advisory. All rights reserved. Proprietary and confidential.
