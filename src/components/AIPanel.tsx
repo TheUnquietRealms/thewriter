@@ -19,6 +19,8 @@ function buildContext(article: Article, codex: Codex): AIContext {
     mode: article.mode,
     voiceRules: codex.voiceRules,
     bannedHabits: codex.bannedHabits,
+    recurringThemes: codex.recurringThemes,
+    sourceNotes: codex.sourceNotes,
     bodySample: article.body.slice(0, 500),
     title: article.title,
   }
