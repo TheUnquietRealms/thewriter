@@ -154,6 +154,10 @@ body {
   overflow: hidden;
 }
 
+.app-shell.app-shell--focus {
+  grid-template-columns: 1fr;
+}
+
 .app-shell--focus .navigator,
 .app-shell--focus .right-panel {
   display: none;
