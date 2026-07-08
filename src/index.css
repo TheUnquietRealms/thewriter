@@ -14,6 +14,7 @@
   --radius-sm: 5px;
   --radius-full: 999px;
   --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.14);
 
   /* Light+ (default / data-theme="light") */
   --text: #3B3B3B;
@@ -135,6 +136,22 @@
 
 * { box-sizing: border-box; }
 
+/* ── Button polish — tactile hover/press feel ─────────────── */
+button {
+  transition: background 140ms, border-color 140ms, color 140ms, box-shadow 160ms, transform 100ms;
+}
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(:disabled):active {
+  transform: translateY(0);
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+  transform: none !important;
+}
+
 html, body { height: 100%; margin: 0; }
 
 body {
@@ -202,7 +219,7 @@ body {
   transition: background 140ms;
 }
 
-.btn-new:hover { background: var(--accent-hover); }
+.btn-new:hover { background: var(--accent-hover); box-shadow: var(--shadow-md); }
 
 .nav-search-wrap {
   position: relative;
@@ -384,7 +401,11 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20400%22%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22200%22%20r%3D%22176%22%20fill%3D%22none%22%20stroke%3D%22%232F6E6E%22%20stroke-width%3D%222%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22200%22%20r%3D%22164%22%20fill%3D%22none%22%20stroke%3D%22%232F6E6E%22%20stroke-width%3D%221%22%20opacity%3D%220.35%22%2F%3E%0A%20%20%3Cg%20stroke%3D%22%232F6E6E%22%20stroke-width%3D%222.5%22%20fill%3D%22none%22%20opacity%3D%220.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M200%20150%20C%20160%20130%2C%20110%20138%2C%2090%20152%20L%2090%20230%20C%20110%20216%2C%20160%20208%2C%20200%20228%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M200%20150%20C%20240%20130%2C%20290%20138%2C%20310%20152%20L%20310%20230%20C%20290%20216%2C%20240%20208%2C%20200%20228%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22200%22%20y1%3D%22150%22%20x2%3D%22200%22%20y2%3D%22228%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20stroke%3D%22%232F6E6E%22%20stroke-width%3D%221.2%22%20opacity%3D%220.4%22%3E%0A%20%20%20%20%3Cline%20x1%3D%22105%22%20y1%3D%22168%22%20x2%3D%22150%22%20y2%3D%22160%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22105%22%20y1%3D%22182%22%20x2%3D%22150%22%20y2%3D%22174%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22105%22%20y1%3D%22196%22%20x2%3D%22150%22%20y2%3D%22188%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22250%22%20y1%3D%22160%22%20x2%3D%22295%22%20y2%3D%22168%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22250%22%20y1%3D%22174%22%20x2%3D%22295%22%20y2%3D%22182%22%2F%3E%0A%20%20%20%20%3Cline%20x1%3D%22250%22%20y1%3D%22188%22%20x2%3D%22295%22%20y2%3D%22196%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20fill%3D%22%232F6E6E%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%2295%22%20cy%3D%22270%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(-30%2095%20270)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22110%22%20cy%3D%22285%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(-15%20110%20285)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22128%22%20cy%3D%22296%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(0%20128%20296)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22148%22%20cy%3D%22302%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(12%20148%20302)%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20fill%3D%22%232F6E6E%22%20opacity%3D%220.45%22%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22305%22%20cy%3D%22270%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(30%20305%20270)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22290%22%20cy%3D%22285%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(15%20290%20285)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22272%22%20cy%3D%22296%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(0%20272%20296)%22%2F%3E%0A%20%20%20%20%3Cellipse%20cx%3D%22252%22%20cy%3D%22302%22%20rx%3D%2210%22%20ry%3D%225%22%20transform%3D%22rotate(-12%20252%20302)%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22270%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2C%20serif%22%20font-size%3D%2215%22%20letter-spacing%3D%224%22%20fill%3D%22%232F6E6E%22%20opacity%3D%220.5%22%3ETHE%20WRITER%3C%2Ftext%3E%0A%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%3E%0A%20%20%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.9%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200.91%20%200%200%200%200%200.87%20%200%200%200%200%200.78%20%200%200%200%200.06%200%22%2F%3E%3C%2Ffilter%3E%0A%20%20%3Crect%20width%3D%22120%22%20height%3D%22120%22%20filter%3D%22url(%2523n)%22%2F%3E%0A%3C%2Fsvg%3E");
+  background-repeat: no-repeat, repeat;
+  background-position: center 42%, top left;
+  background-size: 460px 460px, 120px 120px;
 }
 
 .editor--empty {
@@ -507,7 +528,7 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.btn-toolbar:hover { background: var(--surface-hover); border-color: var(--text-muted); }
+.btn-toolbar:hover { background: var(--surface-hover); border-color: var(--text-muted); box-shadow: var(--shadow-md); }
 
 .btn-toolbar--accent {
   background: var(--green-bg);
@@ -1289,7 +1310,7 @@ body {
   transition: all 120ms;
   text-align: left;
 }
-.btn-theme-swatch:hover { background: var(--surface-hover); border-color: var(--text-muted); }
+.btn-theme-swatch:hover { background: var(--surface-hover); border-color: var(--text-muted); box-shadow: var(--shadow-md); }
 .btn-theme-swatch--active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
 .theme-swatch-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.15); }
 .btn-theme-swatch--light .theme-swatch-dot { background: #FFFFFF; }
@@ -1299,7 +1320,7 @@ body {
 .btn-theme-swatch--solarized-dark .theme-swatch-dot { background: #002B36; }
 .btn-theme-swatch--solarized-light .theme-swatch-dot { background: #FDF6E3; }
 .btn-provider { background: var(--surface-raised); border: 2px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font: 600 12px var(--sans); padding: 7px 10px; cursor: pointer; transition: all 120ms; text-align: center; }
-.btn-provider:hover { background: var(--surface-hover); border-color: var(--text-muted); }
+.btn-provider:hover { background: var(--surface-hover); border-color: var(--text-muted); box-shadow: var(--shadow-md); }
 .btn-provider--active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
 
 /* ── AI quality gate ────────────────────────── */
